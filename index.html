@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fallback | Fargo, ND | 2005-2011</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body { background: white; color: black; font-family: 'Inter', Arial, sans-serif; margin: 0; line-height: 1.6; }
+nav { background: white; border-bottom: 1px solid #ddd; position: fixed; top: 0; left: 0; right: 0; height: 64px; z-index: 1000; }
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; color: black; text-decoration: none; letter-spacing: 3px; }
+.nav-links { display: flex; list-style: none; gap: 32px; margin: 0; padding: 0; }
+.nav-links a { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #555; text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+.nav-links a:hover { color: #c0392b; }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: black; margin: 5px 0; }
+.hero { background: #f0f0f0; text-align: center; padding: 180px 24px 140px; margin-top: 64px; border-bottom: 4px solid #c0392b; }
+.hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 700; color: black; letter-spacing: 12px; line-height: 1; }
+.hero-tagline { font-family: 'Oswald', sans-serif; font-size: 1.25rem; letter-spacing: 6px; color: #555; margin-top: 16px; text-transform: uppercase; }
+.hero-genre { font-size: 0.9rem; color: #c0392b; letter-spacing: 4px; text-transform: uppercase; margin-top: 12px; }
+.hero-motto { font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 3px; color: #777; margin-top: 24px; font-style: italic; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+.bg-white { background: white; }
+.bg-gray { background: #f5f5f5; }
+h2 { font-family: 'Oswald', sans-serif; font-size: 2rem; color: black; text-align: center; margin-bottom: 40px; letter-spacing: 4px; }
+h2 .bar { display: block; width: 60px; height: 3px; background: #c0392b; margin: 12px auto 0; }
+.card { background: white; border: 1px solid #ddd; border-radius: 8px; padding: 24px; margin-bottom: 16px; }
+.card h3 { color: black; font-family: 'Oswald', sans-serif; margin-bottom: 4px; }
+.album-header { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 16px; }
+.album-art { width: 200px; height: 200px; border-radius: 6px; object-fit: cover; flex-shrink: 0; border: 1px solid #ddd; }
+.album-header-info { flex: 1; }
+.card p { color: #555; margin: 4px 0; }
+.accent { color: #c0392b; }
+.tag { display: inline-block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #c0392b; background: rgba(192,57,43,0.1); padding: 3px 8px; border-radius: 4px; margin-left: 8px; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; align-items: start; }
+.about-text { font-size: 1.05rem; line-height: 1.8; color: #333; }
+.about-text p { margin-bottom: 16px; }
+.stats { display: flex; flex-direction: column; gap: 20px; }
+.stat { text-align: center; padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; }
+.stat-num { display: block; font-family: 'Oswald', sans-serif; font-size: 2rem; font-weight: 700; color: #c0392b; }
+.stat-lbl { display: block; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: #777; margin-top: 4px; }
+.influences { margin-top: 24px; padding: 20px; background: #f5f5f5; border-radius: 8px; }
+.influences h3 { font-family: 'Oswald', sans-serif; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; color: #c0392b; margin-bottom: 8px; }
+.influences p { color: #555; font-size: 0.9rem; line-height: 1.6; }
+
+/* Members */
+.members-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.member { text-align: center; padding: 24px 16px; background: white; border: 1px solid #ddd; border-radius: 8px; }
+.member h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; color: black; margin-bottom: 4px; }
+.member-role { color: #c0392b; font-size: 0.9rem; font-weight: 500; }
+.member-years { color: #888; font-size: 0.8rem; margin-top: 4px; }
+.member-note { color: #999; font-size: 0.75rem; font-style: italic; margin-top: 4px; }
+.members-former { margin-top: 32px; }
+.members-former h3 { font-family: 'Oswald', sans-serif; font-size: 1.2rem; color: #888; text-align: center; margin-bottom: 16px; letter-spacing: 2px; text-transform: uppercase; }
+.former-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 500px; margin: 0 auto; }
+.former { text-align: center; padding: 20px 16px; background: #fafafa; border: 1px solid #eee; border-radius: 8px; }
+.former h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #666; margin-bottom: 4px; }
+
+/* Discography */
+.album-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.album-tracks ol { padding-left: 20px; margin-top: 12px; }
+.album-tracks li { color: #555; padding: 6px 0; border-bottom: 1px solid #eee; }
+.album-tracks li:last-child { border-bottom: none; }
+.album-highlights { margin-top: 16px; }
+.album-highlights li { list-style: none; padding: 4px 0; color: #555; font-size: 0.9rem; }
+.album-highlights li strong { color: black; }
+
+/* Videos */
+.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; }
+.video-item { background: white; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+.video-item .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-item .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-item h3 { font-family: 'Oswald', sans-serif; padding: 12px 16px 4px; color: black; }
+.video-item p { color: #777; font-size: 0.85rem; padding: 0 16px 12px; }
+
+/* Shows */
+.timeline { max-width: 800px; margin: 0 auto; }
+.year-group { margin-bottom: 32px; }
+.year-label { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; color: #c0392b; letter-spacing: 2px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #ddd; }
+.show { padding: 10px 16px; background: white; border: 1px solid #ddd; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.show-info { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.show-date { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: #888; min-width: 90px; }
+.show-venue { font-weight: 500; color: black; }
+.show-with { color: #777; font-size: 0.85rem; }
+.show-city { color: #888; font-size: 0.85rem; }
+.national-acts { margin-top: 32px; padding: 24px; background: white; border: 1px solid #ddd; border-radius: 8px; text-align: center; }
+.national-acts h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #c0392b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.national-acts p { color: #555; font-size: 1rem; line-height: 1.8; }
+
+/* Press */
+.press-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }
+.press-item { padding: 16px; background: white; border: 1px solid #ddd; border-radius: 8px; }
+.press-item h3 { font-family: 'Oswald', sans-serif; font-size: 1rem; color: black; margin-bottom: 4px; }
+.press-item p { color: #777; font-size: 0.85rem; }
+
+footer { background: #e8e8e8; border-top: 1px solid #ddd; padding: 40px 24px; text-align: center; }
+footer p { color: #555; font-size: 0.9rem; margin: 4px 0; }
+.footer-logo { font-family: 'Oswald', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: 4px; color: black; }
+.footer-copy { margin-top: 16px; font-size: 0.8rem; color: #888; }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+  .nav-links { position: absolute; top: 64px; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 20px; border-bottom: 1px solid #ddd; display: none; }
+  .nav-links.open { display: flex; }
+  .about-grid { grid-template-columns: 1fr; }
+  .album-header { flex-direction: column; align-items: center; text-align: center; }
+  .album-detail { grid-template-columns: 1fr; }
+  .video-grid { grid-template-columns: 1fr; }
+  .show { flex-direction: column; align-items: flex-start; }
+  .show-info { flex-direction: column; gap: 4px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">FALLBACK</a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#members">Members</a></li>
+      <li><a href="#discography">Discography</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#shows">Shows</a></li>
+      <li><a href="#press">Press</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>FALLBACK</h1>
+  <p class="hero-tagline">FARGO, ND &bull; 2005&ndash;2011</p>
+  <p class="hero-genre">NU METAL / ALTERNATIVE METAL / MELODIC METAL</p>
+  <p class="hero-motto">"Strength to be Driven"</p>
+</div>
+
+<section id="about" class="bg-white">
+  <div class="container">
+    <h2>ABOUT<span class="bar"></span></h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Fallback was established in 2005 based out of Fargo, North Dakota. Fallback consisted of 5 members with their own unique influences which cover every inch of the spectrum to create music that appeals on every level. Fallback's sound is emotionally direct, raw, and captivating.</p>
+        <p>Lead singer Jarrod Simek has a vocal range that can go hauntingly deep and melodic to infuriated growls in a matter of seconds. The guitarist duo of Cody Marshall and Tyler Strand do an amazing job of switching between rhythm and lead throughout the band, effectively feeding off each other's beefy power chord-driven rhythm riffs with intricate lead harmonies.</p>
+        <p>Dustin Huber filled in the shoes of original bassist Addison Peck, bringing new insight and forging an influential bass style that came into play with the band's newest material. Tessa Breitbach replaced original drummer Mike Lund &mdash; a "no mercy" drummer who'd been playing for 11 years, holding nothing back, establishing a new respect for the band and female drummers.</p>
+        <p>Fallback released their self-titled album debut in May 2008, which spawned great singles including "Driven" (which hit the Top Ten Loud City Charts) and fan favorite "Visegrip" which became a staple of their live show. Their biggest stage moment came opening for Five Finger Death Punch in front of 2,500 people. In 2009, Fallback won Q98's Battle of the Bands and was selected as one of 15 bands nationally for the Rockstar Mayhem Festival Pick The Band contest. Their follow-up EP "Vexing the Dull" was released independently in 2010 to strong critical reception, earning airplay on New Rock 105.1's Iowa Unsigned and interest from Lazer 103.3 in Des Moines.</p>
+        <div class="influences">
+          <h3>Influences</h3>
+          <p>Deftones, Staind, Dry Kill Logic, BLS, Metallica, Pantera, Ill Nino, Taproot, Static X, Mudvayne, Disturbed, Led Zeppelin, AC/DC, Black Sabbath, Machine Head, Cold, Sevendust, Faith No More, Blue October, Fear Factory</p>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="stat-num">2005</span><span class="stat-lbl">Formed</span></div>
+        <div class="stat"><span class="stat-num">2011</span><span class="stat-lbl">Final Show</span></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">Years Active</span></div>
+        <div class="stat"><span class="stat-num">45,310</span><span class="stat-lbl">MySpace Views</span></div>
+        <div class="stat"><span class="stat-num">4,201</span><span class="stat-lbl">MySpace Friends</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="members" class="bg-gray">
+  <div class="container">
+    <h2>MEMBERS<span class="bar"></span></h2>
+    <div class="members-grid">
+      <div class="member">
+        <h3>Jarrod Simek</h3>
+        <p class="member-role">Lead Vocals</p>
+        <p class="member-years">2005&ndash;2011</p>
+      </div>
+      <div class="member">
+        <h3>Cody Marshall</h3>
+        <p class="member-role">Guitar</p>
+        <p class="member-years">2005&ndash;2011</p>
+      </div>
+      <div class="member">
+        <h3>Tyler Strand</h3>
+        <p class="member-role">Guitar</p>
+        <p class="member-years">2005&ndash;2011</p>
+      </div>
+      <div class="member">
+        <h3>Dustin Huber</h3>
+        <p class="member-role">Bass</p>
+        <p class="member-note">Replaced Addison Peck</p>
+      </div>
+      <div class="member">
+        <h3>Tessa Breitbach</h3>
+        <p class="member-role">Drums</p>
+        <p class="member-note">Replaced Mike Lund</p>
+      </div>
+    </div>
+    <div class="members-former">
+      <h3>Former Members</h3>
+      <div class="former-grid">
+        <div class="former">
+          <h3>Addison Peck</h3>
+          <p class="member-role">Bass</p>
+          <p class="member-note">Original bassist</p>
+        </div>
+        <div class="former">
+          <h3>Mike Lund</h3>
+          <p class="member-role">Drums</p>
+          <p class="member-note">Original drummer</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="discography" class="bg-white">
+  <div class="container">
+    <h2>DISCOGRAPHY<span class="bar"></span></h2>
+    <div class="card">
+      <div class="album-header">
+        <img class="album-art" src="https://web.archive.org/web/20090121161947im_/http://cdbaby.name/f/a/fallback.jpg" alt="Fallback - Self-Titled album cover">
+        <div class="album-header-info">
+          <h3>Fallback (Self-Titled)</h3>
+          <p class="accent">May 2008 &bull; Toxic Metal Records</p>
+          <p style="color:#888; font-size:0.85rem;">CD/DVD Combo &bull; 16 tracks &bull; 1 hr 12 min &bull; UPC: 796873042901 &bull; Available on CDBaby &amp; iTunes</p>
+        </div>
+      </div>
+      <div class="album-detail" style="margin-top:16px;">
+        <div>
+          <p style="color:#555;">The self-titled debut album featuring the hit singles "Driven" and "Visegrip." The CD/DVD combo includes the music video for "Driven," a live show recorded at The Aquarium in Fargo, behind-the-scenes footage, and bonus content. Manufactured by Disc Makers.</p>
+          <p style="color:#777; font-size:0.85rem; font-style:italic; margin-top:8px; padding:8px 12px; border-left:3px solid #c0392b;">"Rare form of raw, heavy energy laced with gripping melodies and dark hypnotic tones one can not ignore." &mdash; CD Baby listing, 2008</p>
+          <div style="margin-top:12px; padding:12px; background:#f5f5f5; border-radius:6px; font-size:0.85rem; color:#555;">
+            <strong style="color:black;">Production Credits:</strong> Recorded at Grey Barn Studios (Detroit Lakes, MN) and Toxic Metal Records (Minot, ND). Produced by Rex Dimond (producer/engineer). Co-produced by Kevin Racer (co-producer/engineer). Assistant engineer: Jim Mitchell. Recorded at Golden Dragon Martial Arts (Minot, ND). Mixed and mastered by Rex Dimond at Toxic Metal Records. "Painfully Obvious Remix" by Todd R. (Immune System). Special thanks to Troy Berger of Dragfoot/Toxic Metal Records and Josh Rivera of Echoes Answer. DVD by Red Rope Productions (Josh Zimmerman). Photography by Raven Photography (Lisa Moltz). CD artwork/design by Lisa Moltz. Manufactured by Disc Makers.
+          </div>
+          <div class="album-highlights" style="margin-top:16px;">
+            <h4 style="font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px; color:#c0392b; margin-bottom:8px;">TRACKLIST</h4>
+            <ol style="padding-left:20px;">
+              <li style="padding:4px 0; color:#555;">Intro <span style="color:#aaa;">(2:19)</span></li>
+              <li style="padding:4px 0; color:#555;">Obvious <span style="color:#aaa;">(3:32)</span></li>
+              <li style="padding:4px 0; color:#555;">Cut Me Free <span style="color:#aaa;">(2:41)</span></li>
+              <li style="padding:4px 0; color:#555;">Dreams <span style="color:#aaa;">(4:15)</span></li>
+              <li style="padding:4px 0; color:#555;">(Choices) <span style="color:#aaa;">(2:18)</span></li>
+              <li style="padding:4px 0; color:#555;">Middle Of The Road <span style="color:#aaa;">(6:48)</span></li>
+              <li style="padding:4px 0; color:#555;">Driven <span style="color:#aaa;">(3:36)</span> &mdash; <em style="color:#c0392b;">Top Ten Loud City Charts</em></li>
+              <li style="padding:4px 0; color:#555;">National Override <span style="color:#aaa;">(3:59)</span></li>
+              <li style="padding:4px 0; color:#555;">Once Was (Goodbye) <span style="color:#aaa;">(4:35)</span></li>
+              <li style="padding:4px 0; color:#555;">Augapay <span style="color:#aaa;">(5:44)</span></li>
+              <li style="padding:4px 0; color:#555;">Shadows <span style="color:#aaa;">(5:11)</span></li>
+              <li style="padding:4px 0; color:#555;">Taken Over <span style="color:#aaa;">(4:55)</span></li>
+              <li style="padding:4px 0; color:#555;">Time Will Tell <span style="color:#aaa;">(5:13)</span></li>
+              <li style="padding:4px 0; color:#555;">Bronze <span style="color:#aaa;">(4:05)</span></li>
+              <li style="padding:4px 0; color:#555;">Visegrip <span style="color:#aaa;">(3:26)</span> &mdash; <em style="color:#c0392b;">Fan favorite, live show staple</em></li>
+              <li style="padding:4px 0; color:#555;">Uninvited <span style="color:#aaa;">(10:31)</span></li>
+            </ol>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px; color:#c0392b; margin-bottom:8px;">DVD INCLUDES</h4>
+          <ul style="list-style:none; padding:0;">
+            <li style="padding:4px 0; color:#555;">"Driven" Music Video</li>
+            <li style="padding:4px 0; color:#555;">Live at The Aquarium, Fargo</li>
+            <li style="padding:4px 0; color:#555;">Behind the Scenes Footage</li>
+            <li style="padding:4px 0; color:#555;">Bonus Content</li>
+          </ul>
+          <h4 style="font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px; color:#c0392b; margin-bottom:8px; margin-top:16px;">THANK YOU LIST</h4>
+          <p style="color:#555; font-size:0.85rem; line-height:1.7;">God &bull; My beautiful wife &bull; My fellow bandmates &bull; All Of Our Fans &bull; Red Star Guitar and Drums &bull; Kevin Racer &bull; Pat Hewitt &bull; Kasey &bull; Broken Axe &bull; Brian Grobs &bull; The Nester &bull; S.O.P &bull; Hat &bull; Venus In Furs &bull; Rock Roots &bull; Toxic Metal Records &bull; All of my Friends &bull; Rick's Bar &bull; The Original &bull; Raven Photography &bull; The Reverend &bull; Everyone that has ever supported us &bull; Jarrod</p>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:24px;">
+      <div class="album-header">
+        <img class="album-art" src="images/sddefault.png" alt="Fallback - Vexing the Dull EP cover">
+        <div class="album-header-info">
+          <h3>Vexing the Dull EP</h3>
+          <p class="accent">2010 &bull; Independent Release</p>
+          <p style="color:#888; font-size:0.85rem;">5 tracks &bull; 21 min &bull; Recorded at Cat House Studios (Sioux Falls, SD) &amp; Signal Flow Studios (Minot, ND)</p>
+        </div>
+      </div>
+      <div class="album-detail" style="margin-top:16px;">
+        <div>
+          <p style="color:#555;">The follow-up EP, recorded in late 2008/2009 sessions at Cat House Studios (Sioux Falls, SD) and Signal Flow Studios (Minot, ND). Described by The Muse's Muse as "an impressive musical production from start to finish" with "passionate messages sung from a deeply honest perspective." Vocalist Jarrod Simek was compared to "Michael Patton (Faith No More) on steroids."</p>
+          <div class="album-highlights" style="margin-top:16px;">
+            <h4 style="font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px; color:#c0392b; margin-bottom:8px;">TRACKLIST</h4>
+            <ol style="padding-left:20px;">
+              <li style="padding:4px 0; color:#555;">Own Made Sin <span style="color:#aaa;">(4:14)</span></li>
+              <li style="padding:4px 0; color:#555;">Artificial Prodigy <span style="color:#aaa;">(4:15)</span></li>
+              <li style="padding:4px 0; color:#555;">Driven <span style="color:#aaa;">(3:35)</span></li>
+              <li style="padding:4px 0; color:#555;">Selfish Being <span style="color:#aaa;">(4:09)</span></li>
+              <li style="padding:4px 0; color:#555;">Suicide Red <span style="color:#aaa;">(5:05)</span></li>
+            </ol>
+          </div>
+        </div>
+        <div>
+          <h4 style="font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px; color:#c0392b; margin-bottom:8px;">REVIEW SCORES</h4>
+          <ul style="list-style:none; padding:0;">
+            <li style="padding:4px 0; color:#555;"><strong style="color:black;">Technical:</strong> 10/10</li>
+            <li style="padding:4px 0; color:#555;"><strong style="color:black;">Production/Musicianship:</strong> 9/10</li>
+            <li style="padding:4px 0; color:#555;"><strong style="color:black;">Overall Talent:</strong> 10/10</li>
+            <li style="padding:4px 0; color:#555;"><strong style="color:black;">Performance:</strong> 10/10</li>
+            <li style="padding:4px 0; color:#555;"><strong style="color:black;">Songwriting:</strong> 8/10</li>
+            <li style="padding:4px 0; color:#555;"><strong style="color:black;">Commercial Value:</strong> 8/10</li>
+          </ul>
+          <p style="color:#888; font-size:0.8rem; margin-top:8px; font-style:italic;">&mdash; Cyrus Rhodes, The Muse's Muse (Nov 2010)</p>
+        </div>
+      </div>
+      <div style="margin-top:12px; padding:12px; background:#f5f5f5; border-radius:6px; font-size:0.85rem; color:#555;">
+        <strong style="color:black;">Production Credits:</strong> Drums recorded at Cat House Studios (Sioux Falls, SD) by Mike Dresch. Additional recording at Signal Flow Studios (Minot, ND). CD artwork by Bryan Grob / A Grim Design.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="videos" class="bg-gray">
+  <div class="container">
+    <h2>VIDEOS<span class="bar"></span></h2>
+    <div class="video-grid">
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/7iYWgGvWFIg" title="Fallback - Artificial Prodigy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Artificial Prodigy</h3>
+        <p>From the Vexing the Dull EP &bull; Uploaded by Jarrod Simek</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/Q9g8Cavnehs" title="Fallback LIVE - Cut Me Free" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Cut Me Free (Live)</h3>
+        <p>Live performance</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/cxYKL5Yufao" title="FallbacK DVD Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>DVD Trailer</h3>
+        <p>CD/DVD combo promo &bull; "DVD Available Soon!!"</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/sPzjRvJacWk" title="Fallback pt. 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Unplugged at Hot Topic, pt. 4</h3>
+        <p>Local Static &bull; West Acres, Fargo &bull; May 22, 2009</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/UcP2lsZSFnk" title="Fallback" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Fallback &mdash; "Driven" Music Video</h3>
+        <p>Official music video</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/29SCPlbIr3M" title="Fallback pt. 1 - Local Static at Hot Topic" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Unplugged at Hot Topic, pt. 1</h3>
+        <p>Local Static &bull; West Acres, Fargo &bull; May 22, 2009</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/_Nh6BYwFpRU" title="Fallback pt. 2 - Local Static at Hot Topic" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Unplugged at Hot Topic, pt. 2</h3>
+        <p>Local Static &bull; West Acres, Fargo &bull; May 22, 2009</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/0eO5-G2iQuo" title="Fallback pt. 3 - Local Static at Hot Topic" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Unplugged at Hot Topic, pt. 3</h3>
+        <p>Local Static &bull; West Acres, Fargo &bull; May 22, 2009</p>
+      </div>
+      <div class="video-item">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/hDgAabFKOLs" title="Fallback pt. 5 - Local Static at Hot Topic" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <h3>Unplugged at Hot Topic, pt. 5</h3>
+        <p>Local Static &bull; West Acres, Fargo &bull; May 22, 2009</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="shows" class="bg-white">
+  <div class="container">
+    <h2>SHOW HISTORY<span class="bar"></span></h2>
+    <div class="timeline">
+
+      <div class="year-group">
+        <h3 class="year-label">2010</h3>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Fall</span>
+            <span class="show-venue">New Rock 105.1 &mdash; Iowa Unsigned</span>
+            <span class="show-with">(Radio appearance w/ Benny Black)</span>
+          </div>
+          <span class="show-city">Des Moines, IA</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <h3 class="year-label">2009</h3>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Aug 8</span>
+            <span class="show-venue">Minot show</span>
+          </div>
+          <span class="show-city">Minot, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Jul 18</span>
+            <span class="show-venue">The Nestor Tavern</span>
+            <span class="show-with">w/ Bobaflex, Kill The Sky</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Jun 1</span>
+            <span class="show-venue">Rockstar Mayhem Festival &mdash; Pick The Band Contest</span>
+            <span class="show-with">(Top 15 nationally selected)</span>
+          </div>
+          <span class="show-city">Online / Cleveland, OH</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">May 22&ndash;23</span>
+            <span class="show-venue">Rick's Bar</span>
+            <span class="show-with">Opening for Kamilla</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">May 22</span>
+            <span class="show-venue">West Acres Hot Topic &mdash; Local Static (Unplugged)</span>
+            <span class="show-with">musicasaweapon22</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Apr 11</span>
+            <span class="show-venue">The Nestor Tavern</span>
+            <span class="show-with">w/ Corvo Radio</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Apr 7</span>
+            <span class="show-venue">Old Broadway &mdash; Q98 Battle of the Bands Finals</span>
+            <span class="show-with">w/ Lucyd, Go Steve Jones, A Dying Tide &mdash; WON</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Apr 10</span>
+            <span class="show-venue">Silver Dollar</span>
+            <span class="show-with">w/ Corvo Radio</span>
+          </div>
+          <span class="show-city">Elizabeth, MN</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Jan 30&ndash;31</span>
+            <span class="show-venue">Cat House Studios</span>
+            <span class="show-with">(Recording)</span>
+          </div>
+          <span class="show-city">Sioux Falls, SD</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Jan 16&ndash;18</span>
+            <span class="show-venue">Signal Flow Studios</span>
+            <span class="show-with">(Recording)</span>
+          </div>
+          <span class="show-city">Minot, ND</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <h3 class="year-label">2008</h3>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Nov 14</span>
+            <span class="show-venue">Cat House Studios</span>
+            <span class="show-with">(Recording &mdash; Vexing the Dull drum tracking)</span>
+          </div>
+          <span class="show-city">Sioux Falls, SD</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Nov 1</span>
+            <span class="show-venue">Lisbon show</span>
+            <span class="show-with">(Halloween/costume night)</span>
+          </div>
+          <span class="show-city">Lisbon, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Oct 25</span>
+            <span class="show-venue">The O</span>
+          </div>
+          <span class="show-city">Minot, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Sep 20</span>
+            <span class="show-venue">The Nestor Tavern &mdash; "Blood, Sweat and Beers" Fest</span>
+            <span class="show-with">w/ Crash Burn Repeat, Kill The Sky, Empire Builder</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Sep 13</span>
+            <span class="show-venue">Rick's Bar</span>
+            <span class="show-with">w/ Kill The Sky</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Aug 25</span>
+            <span class="show-venue">Lex and Terry Morning Show</span>
+            <span class="show-with">(Nationally syndicated radio &mdash; aired that morning)</span>
+          </div>
+          <span class="show-city">Radio</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Aug</span>
+            <span class="show-venue">Rick's Bar</span>
+            <span class="show-with">(Covers + new material)</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">May 24</span>
+            <span class="show-venue">Opening for Five Finger Death Punch (2,500 attendance)</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">May 23</span>
+            <span class="show-venue">Rascals</span>
+            <span class="show-with">w/ Kill The Sky (FFDP pre-show)</span>
+          </div>
+          <span class="show-city">Moorhead, MN</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Aug</span>
+            <span class="show-venue">Show w/ Blue Felix</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Various</span>
+            <span class="show-venue">The Aquarium</span>
+            <span class="show-with">(Live DVD filmed here)</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <h3 class="year-label">2007</h3>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Nov 17</span>
+            <span class="show-venue">All Star Axe</span>
+            <span class="show-with">Headlining w/ Society Lies</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Nov</span>
+            <span class="show-venue">All Star Axe</span>
+            <span class="show-with">Opening for Methuselah</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Oct&ndash;Nov</span>
+            <span class="show-venue">Grey Barn Studios &amp; Toxic Metal Records</span>
+            <span class="show-with">(Recording self-titled album)</span>
+          </div>
+          <span class="show-city">Detroit Lakes, MN &amp; Minot, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Various</span>
+            <span class="show-venue">The Nestor Tavern, Rick's Bar, The Aquarium</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+      </div>
+
+      <div class="year-group">
+        <h3 class="year-label">2005&ndash;2006</h3>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Apr 7, 2006</span>
+            <span class="show-venue">Rick's Bar</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">2006</span>
+            <span class="show-venue">All Star Bowl</span>
+          </div>
+          <span class="show-city">Fargo, ND</span>
+        </div>
+        <div class="show">
+          <div class="show-info">
+            <span class="show-date">Various</span>
+            <span class="show-venue">The Nestor Tavern, Rick's Bar, and more</span>
+          </div>
+          <span class="show-city">Fargo-Moorhead</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="national-acts">
+      <h3>Shared the Stage With</h3>
+      <p>Five Finger Death Punch &bull; Red &bull; Hurt &bull; Dope &bull; Flaw &bull; Bobaflex &bull; 36 Crazyfists &bull; Motograter &bull; Under the Flood &bull; Seasons After &bull; Blue Felix &bull; Crash Burn Repeat &bull; Empire Builder &bull; Kamilla &bull; Facecage &bull; Kill The Sky &bull; Society Lies &bull; Lucyd &bull; Corvo Radio</p>
+    </div>
+  </div>
+</section>
+
+<section id="press" class="bg-gray">
+  <div class="container">
+    <h2>PRESS &amp; FEATURES<span class="bar"></span></h2>
+    <div class="press-grid">
+      <div class="press-item">
+        <h3>"Driven" &mdash; Top Ten Loud City Charts</h3>
+        <p>The lead single from the self-titled album broke into the Top Ten on the Loud City Charts.</p>
+      </div>
+      <div class="press-item">
+        <h3>The Muse's Muse &mdash; "Vexing the Dull" Review</h3>
+        <p>10/10 Technical, 10/10 Overall Talent, 10/10 Performance. Reviewer Cyrus Rhodes: "an impressive musical production from start to finish." (Nov 2010)</p>
+      </div>
+      <div class="press-item">
+        <h3>Q98 Battle of the Bands &mdash; 2009 Champions</h3>
+        <p>Fallback won Q98's Battle of the Bands Finals on April 7, 2009 at the Old Broadway, competing against Lucyd, Go Steve Jones, and A Dying Tide.</p>
+      </div>
+      <div class="press-item">
+        <h3>Rockstar Mayhem Festival &mdash; Pick The Band Contest</h3>
+        <p>Selected as one of 15 bands nationally for the Pick The Band - Rockstar Mayhem Festival contest (June 2009). Performance date was July 31st in Cleveland, OH.</p>
+        <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
+          <img src="images/mayhem-vote-banner.jpg" alt="Pick The Band - Vote For Us banner" style="max-width:280px; border-radius:4px; border:1px solid #ddd;">
+          <img src="images/mayhem-chosen.jpg" alt="Pick The Band - Your band has been chosen" style="max-width:280px; border-radius:4px; border:1px solid #ddd;">
+        </div>
+      </div>
+      <div class="press-item">
+        <h3>New Rock 105.1 &mdash; Iowa Unsigned</h3>
+        <p>Featured on Benny Black's Iowa Unsigned show on New Rock 105.1 in Des Moines. All five Vexing the Dull tracks were submitted and praised by the host. (Sept 2010)</p>
+      </div>
+      <div class="press-item">
+        <h3>Lazer 103.3 &mdash; Local Licks</h3>
+        <p>Suzi Lazer at Des Moines Radio Group's Lazer 103.3 requested Fallback's press release and demo for the Local Licks program. (Sept 2010)</p>
+      </div>
+      <div class="press-item">
+        <h3>Streetcult Sampler Vol. 9 &mdash; Eclipse Records</h3>
+        <p>"Driven" was featured as Track #1 on the Streetcult Street Teams Loud Music Sampler CD Volume 9, released by Eclipse Records / Streetcult Marketing (2008).</p>
+      </div>
+      <div class="press-item">
+        <h3>ESP Guitars &mdash; Endorsement Submission</h3>
+        <p>Submitted a demo and press kit to ESP Guitars for possible endorsement consideration (Aug 2008).</p>
+      </div>
+      <div class="press-item">
+        <h3>TAXI A&amp;R &mdash; Song Critique</h3>
+        <p>Through Disc Makers, received a professional song critique from TAXI's A&amp;R staff, the world's leading independent A&amp;R company.</p>
+      </div>
+      <div class="press-item">
+        <h3>Northern Edge Music &mdash; Interview</h3>
+        <p>Interview published on northernedgemusic.info (Oct 2008). Northern Edge Music was a key local music publication covering the Fargo-Moorhead scene.</p>
+      </div>
+      <div class="press-item">
+        <h3>Lex and Terry Morning Show</h3>
+        <p>Featured on the nationally syndicated Lex and Terry Morning Show for unsigned talent. Aired August 25, 2008 &mdash; confirmed by fan comments on MySpace that morning.</p>
+      </div>
+      <div class="press-item">
+        <h3>Q98 Radio Promotion</h3>
+        <p>Worked with Kelly Ring at Go Radio Broadcasting (Q98) on radio ads promoting the Five Finger Death Punch pre-show at Rascals (May 2008). Novack from Q98 facilitated the connection.</p>
+      </div>
+      <div class="press-item">
+        <h3>525.com &amp; BreakthruRadio.com</h3>
+        <p>Fallback actively promoted listener requests on 525.com and BreakthruRadio.com.</p>
+      </div>
+      <div class="press-item">
+        <h3>CD Baby &amp; iTunes Distribution</h3>
+        <p>Self-titled album distributed digitally through CD Baby and iTunes, generating ongoing sales and direct ACH payments to the band.</p>
+      </div>
+      <div class="press-item">
+        <h3>Hard Rock Society &mdash; Fargo/Moorhead</h3>
+        <p>Regularly featured in Scot's Hard Rock Society newsletter, one of the key promoters of the Fargo-Moorhead metal scene. Fallback was a mainstay of the local circuit at Rick's Bar, The Nestor Tavern, and The Aquarium.</p>
+      </div>
+      <div class="press-item">
+        <h3>True Talent Management</h3>
+        <p>Connected with True Talent Management through local promoter "Hat" for professional music business guidance and industry contacts (Nov 2007).</p>
+      </div>
+      <div class="press-item">
+        <h3>Sonicbids EPK</h3>
+        <p>Maintained a professional Electronic Press Kit on Sonicbids for booking and promotion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-logo">FALLBACK</p>
+  <p>Fargo, ND &bull; 2005&ndash;2011 &bull; Toxic Metal Records</p>
+  <p style="margin-top:8px;"><a href="https://web.archive.org/web/20090121161947/http://www.myspace.com/fallback5" style="color:#c0392b; text-decoration:none;">MySpace Archive</a> &bull; <a href="https://web.archive.org/web/20081212174140/http://www.fallbacklive.com:80/home.html" style="color:#c0392b; text-decoration:none;">fallbacklive.com Archive</a> &bull; <a href="https://web.archive.org/web/20080617191724/http://cdbaby.com:80/cd/fallback" style="color:#c0392b; text-decoration:none;">CD Baby Archive</a> &bull; <a href="https://www.last.fm/music/Fallback/Fallback+%2F+Self-Title" style="color:#c0392b; text-decoration:none;">Last.fm</a> &bull; <a href="https://web.archive.org/web/20160417192809/http://www.musesmuse.com/mrev-fallback-vexingthedull.html" style="color:#c0392b; text-decoration:none;">Muse's Muse Review</a> &bull; <a href="https://www.facebook.com/group.php?gid=62033026302" style="color:#c0392b; text-decoration:none;">Hard Rock Society (FB)</a></p>
+  <p class="footer-copy">&copy; Fallback. Built with love and nostalgia.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+  links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { links.classList.remove('open'); }); });
+});
+</script>
+</body>
+</html>
