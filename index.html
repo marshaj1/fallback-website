@@ -91,6 +91,15 @@ h2 .bar { display: block; width: 60px; height: 3px; background: #c0392b; margin:
 .national-acts h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #c0392b; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
 .national-acts p { color: #555; font-size: 1rem; line-height: 1.8; }
 
+/* Photos */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.photo-grid img { width: 100%; height: 250px; object-fit: cover; border-radius: 6px; cursor: pointer; transition: transform 0.2s; border: 1px solid #ddd; }
+.photo-grid img:hover { transform: scale(1.02); }
+.photo-caption { font-size: 0.8rem; color: #777; text-align: center; margin-top: 4px; }
+.lightbox { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center; cursor: pointer; }
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 4px; }
+
 /* Press */
 .press-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 16px; }
 .press-item { padding: 16px; background: white; border: 1px solid #ddd; border-radius: 8px; }
@@ -125,6 +134,7 @@ footer p { color: #555; font-size: 0.9rem; margin: 4px 0; }
       <li><a href="#about">About</a></li>
       <li><a href="#members">Members</a></li>
       <li><a href="#music">Music</a></li>
+      <li><a href="#photos">Photos</a></li>
       <li><a href="#discography">Discography</a></li>
       <li><a href="#videos">Videos</a></li>
       <li><a href="#shows">Shows</a></li>
@@ -227,7 +237,24 @@ footer p { color: #555; font-size: 0.9rem; margin: 4px 0; }
   </div>
 </section>
 
-<section id="discography" class="bg-gray">
+<section id="photos" class="bg-gray">
+  <div class="container">
+    <h2>PHOTOS<span class="bar"></span></h2>
+    <div class="photo-grid">
+      <div><img src="photos/509501634120.jpg" alt="Fallback live on stage" onclick="openLightbox(this)"><p class="photo-caption">Live on stage</p></div>
+      <div><img src="photos/509501639110.jpg" alt="Fallback band promo photo" onclick="openLightbox(this)"><p class="photo-caption">Band promo — Larson Welding, Fargo</p></div>
+      <div><img src="photos/509501649090.jpg" alt="Guitarists performing live" onclick="openLightbox(this)"><p class="photo-caption">Live performance</p></div>
+      <div><img src="photos/509501654080.jpg" alt="Fallback live with vocalist" onclick="openLightbox(this)"><p class="photo-caption">Live with vocalist</p></div>
+      <div><img src="photos/515969607250.jpg" alt="On stage from behind" onclick="openLightbox(this)"><p class="photo-caption">On stage</p></div>
+      <div><img src="photos/509501599190.jpg" alt="Promo shoot at junkyard" onclick="openLightbox(this)"><p class="photo-caption">Promo shoot — junkyard</p></div>
+      <div><img src="photos/509501594200.jpg" alt="In the studio with guitar" onclick="openLightbox(this)"><p class="photo-caption">In the studio</p></div>
+      <div><img src="photos/513725220020.jpg" alt="Practice space" onclick="openLightbox(this)"><p class="photo-caption">Practice space</p></div>
+      <div><img src="photos/10100379948957680.jpg" alt="Custom beer guitars" onclick="openLightbox(this)"><p class="photo-caption">Custom Busch &amp; Budweiser guitars</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="discography" class="bg-white">
   <div class="container">
     <h2>DISCOGRAPHY<span class="bar"></span></h2>
     <div class="card">
@@ -324,7 +351,7 @@ footer p { color: #555; font-size: 0.9rem; margin: 4px 0; }
   </div>
 </section>
 
-<section id="videos" class="bg-white">
+<section id="videos" class="bg-gray">
   <div class="container">
     <h2>VIDEOS<span class="bar"></span></h2>
     <div class="video-grid">
@@ -395,7 +422,7 @@ footer p { color: #555; font-size: 0.9rem; margin: 4px 0; }
   </div>
 </section>
 
-<section id="shows" class="bg-gray">
+<section id="shows" class="bg-white">
   <div class="container">
     <h2>SHOW HISTORY<span class="bar"></span></h2>
     <div class="timeline">
@@ -652,7 +679,7 @@ footer p { color: #555; font-size: 0.9rem; margin: 4px 0; }
   </div>
 </section>
 
-<section id="press" class="bg-white">
+<section id="press" class="bg-gray">
   <div class="container">
     <h2>PRESS &amp; FEATURES<span class="bar"></span></h2>
     <div class="press-grid">
@@ -746,6 +773,13 @@ document.addEventListener('DOMContentLoaded', function() {
   toggle.addEventListener('click', function() { links.classList.toggle('open'); });
   links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { links.classList.remove('open'); }); });
 });
+function openLightbox(img) {
+  var lb = document.getElementById('lightbox');
+  lb.querySelector('img').src = img.src;
+  lb.classList.add('active');
+}
+document.getElementById('lightbox').addEventListener('click', function() { this.classList.remove('active'); });
 </script>
+<div id="lightbox" class="lightbox"><img src="" alt=""></div>
 </body>
 </html>
